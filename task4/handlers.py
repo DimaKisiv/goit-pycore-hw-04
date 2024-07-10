@@ -14,7 +14,7 @@ def handle(command, args):
         case Commands.PHONE:
             show_phone(args)
         case Commands.ALL:
-            print(repository.contacts)
+            show_all()
         case Commands.CLOSE:
             print(Messages.GoodBye)
             return False
@@ -45,6 +45,9 @@ def show_phone(args):
         print(Messages.ContactDoesNotExist)
         return
     print(repository.contacts[name])
+
+def show_all():
+    print(repository.contacts)
 
 def delete_contact(args):
     name = args[0]
