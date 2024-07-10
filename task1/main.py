@@ -2,6 +2,8 @@ from pathlib import Path
 
 def total_salary(path):
     salaries = read_data(path)
+    if (len(salaries) == 0):
+        return (0, 0)
     total = sum(salaries)
     average = (total // len(salaries))
     return (total, average)
