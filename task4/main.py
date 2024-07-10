@@ -8,7 +8,7 @@ def main():
     while True:
         command, *args = parse_input(input(Messages.EnterACommand))
         error = validate_input(command, args)
-        if (error):
+        if error:
             print(error)
             continue
         if command == Commands.CLOSE or command == Commands.EXIT:
