@@ -4,55 +4,44 @@ import repository
 def handle(command, args):
     match command:
         case Commands.HELLO:
-            print(Messages.HowCanIHelpYou)
+            return Messages.HowCanIHelpYou
         case Commands.ADD:
-            add_contact(args)
+            return add_contact(args)
         case Commands.CHANGE:
-            change_contact(args)
+            return change_contact(args)
         case Commands.DELETE:
-            delete_contact(args)
+            return delete_contact(args)
         case Commands.PHONE:
-            show_phone(args)
+            return show_phone(args)
         case Commands.ALL:
-            show_all()
-        case Commands.CLOSE:
-            print(Messages.GoodBye)
-            return False
-        case Commands.EXIT:
-            print(Messages.GoodBye)
-            return False
-    return True
+            return show_all()
 
 def add_contact(args):
     name, phone = args
     if name in repository.contacts:
-        print(Messages.ContactAlreadyExists)
-        return
+        return Messages.ContactAlreadyExists
     repository.contacts[name] = phone
-    print(Messages.ContactAdded)
+    return Messages.ContactAdded
 
 def change_contact(args):
     name, phone = args
     if name not in repository.contacts:
-        print(Messages.ContactDoesNotExist)
-        return
+        return Messages.ContactDoesNotExist
     repository.contacts[name] = phone
-    print(Messages.ContactChanged)
+    return Messages.ContactChanged
 
 def show_phone(args):
     name = args[0]
     if name not in repository.contacts:
-        print(Messages.ContactDoesNotExist)
-        return
-    print(repository.contacts[name])
-
-def show_all():
-    print(repository.contacts)
+        return Messages.ContactDoesNotExist
+    return repository.contacts[name]
 
 def delete_contact(args):
     name = args[0]
     if name not in repository.contacts:
-        print(Messages.ContactDoesNotExist)
-        return
+        return Messages.ContactDoesNotExist
     repository.contacts.pop(name)
-    print(Messages.ContactDeleted)
+    return Messages.ContactDeleted
+
+def show_all():
+    return repository.contacts
